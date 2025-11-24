@@ -56,3 +56,33 @@ rag-qa-k8s/
 ├── Dockerfile
 ├── requirements.txt
 └── README.md
+
+
+
+
+## How to Run Locally (Mac / Apple Silicon — 100 % working as of Nov 2025)
+
+### Prerequisites
+- Docker Desktop (with Kubernetes enabled)
+- kubectl
+- Git
+
+### One-command full setup (takes ~5–8 minutes first time)
+
+```bash
+# 1. Clone & enter
+git clone https://github.com/7skaliahmed07/RAG-Based_Pipeline.git
+cd rag-qa-k8s
+
+# 2. Build the image
+docker build -t rag-qa-k8s:latest .
+
+# 3. Deploy everything (RAG + Ollama + HPA)
+kubectl apply -f k8s/
+
+# 4. Wait for Ollama to download Llama 3.2 (~2 GB, one-time)
+kubectl wait --for=condition=Ready pod -l app=ollama --timeout=600s
+kubectl exec -it deployment/ollama -- ollama pull llama3.2
+
+# 5. Access the app
+kubectl port-forward service/rag-qa-k8s-service 8000:8000
