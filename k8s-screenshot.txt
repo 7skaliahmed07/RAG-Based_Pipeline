@@ -1,0 +1,26 @@
+NAME                              READY   STATUS    RESTARTS   AGE     IP          NODE             NOMINATED NODE   READINESS GATES
+pod/ollama-5746576668-mww88       1/1     Running   0          8m51s   10.1.0.13   docker-desktop   <none>           <none>
+pod/rag-qa-k8s-6b946bb8d4-gr5cl   1/1     Running   0          2m46s   10.1.0.15   docker-desktop   <none>           <none>
+
+NAME                         TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE   SELECTOR
+service/kubernetes           ClusterIP      10.96.0.1        <none>        443/TCP          30m   <none>
+service/ollama               ClusterIP      10.109.36.95     <none>        11434/TCP        16m   app=ollama
+service/rag-qa-k8s-service   LoadBalancer   10.103.178.203   localhost     8000:30946/TCP   30m   app=rag-qa-k8s
+
+NAME                         READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS   IMAGES                 SELECTOR
+deployment.apps/ollama       1/1     1            1           8m51s   ollama       ollama/ollama:latest   app=ollama
+deployment.apps/rag-qa-k8s   1/1     1            1           30m     rag          rag-qa-k8s:latest      app=rag-qa-k8s
+
+NAME                                    DESIRED   CURRENT   READY   AGE     CONTAINERS   IMAGES                 SELECTOR
+replicaset.apps/ollama-5746576668       1         1         1       8m51s   ollama       ollama/ollama:latest   app=ollama,pod-template-hash=5746576668
+replicaset.apps/rag-qa-k8s-5f8f67b9ff   0         0         0       26m     rag          rag-qa-k8s:latest      app=rag-qa-k8s,pod-template-hash=5f8f67b9ff
+replicaset.apps/rag-qa-k8s-6448586b47   0         0         0       20m     rag          rag-qa-k8s:latest      app=rag-qa-k8s,pod-template-hash=6448586b47
+replicaset.apps/rag-qa-k8s-65d5c96cbb   0         0         0       16m     rag          rag-qa-k8s:latest      app=rag-qa-k8s,pod-template-hash=65d5c96cbb
+replicaset.apps/rag-qa-k8s-68fccd644d   0         0         0       16m     rag          rag-qa-k8s:latest      app=rag-qa-k8s,pod-template-hash=68fccd644d
+replicaset.apps/rag-qa-k8s-6b946bb8d4   1         1         1       2m46s   rag          rag-qa-k8s:latest      app=rag-qa-k8s,pod-template-hash=6b946bb8d4
+replicaset.apps/rag-qa-k8s-77889976bd   0         0         0       30m     rag          rag-qa-k8s:latest      app=rag-qa-k8s,pod-template-hash=77889976bd
+replicaset.apps/rag-qa-k8s-788dc79774   0         0         0       5m58s   rag          rag-qa-k8s:latest      app=rag-qa-k8s,pod-template-hash=788dc79774
+replicaset.apps/rag-qa-k8s-7ff444fd7d   0         0         0       29m     rag          rag-qa-k8s:latest      app=rag-qa-k8s,pod-template-hash=7ff444fd7d
+
+NAME                                                 REFERENCE               TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/rag-qa-k8s-hpa   Deployment/rag-qa-k8s   cpu: <unknown>/70%   1         5         1          30m

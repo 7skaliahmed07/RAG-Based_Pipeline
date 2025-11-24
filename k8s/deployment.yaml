@@ -15,6 +15,7 @@ spec:
       containers:
       - name: rag
         image: rag-qa-k8s:latest
+        imagePullPolicy: Never     # ← THIS LINE IS CRITICAL
         ports:
         - containerPort: 8000
         resources:
