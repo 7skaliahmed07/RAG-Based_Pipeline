@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rag-qa-k8s
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rag-qa-k8s
+  template:
+    metadata:
+      labels:
+        app: rag-qa-k8s
+    spec:
+      containers:
+      - name: rag
+        image: rag-qa-k8s:latest
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "2000m"
+        volumeMounts:
+        - name: data-volume
+          mountPath: /app/data
+        - name: vector-volume
+          mountPath: /app/vector_store
+      volumes:
+      - name: data-volume
+        hostPath:
+          path: /Users/muzzu/Projects/rag-qa-k8s/data
+      - name: vector-volume
+        hostPath:
+          path: /Users/muzzu/Projects/rag-qa-k8s/vector_store
