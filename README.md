@@ -5,6 +5,10 @@
 ![Kubernetes](https://img.shields.io/badge/K8s-Minikube%20%2B%20HPA-orange)
 ![License](https://img.shields.io/badge/license-MIT-brightgreen)
 
+![Alt text]([image.jpg](https://github.com/7skaliahmed07/RAG-Based_Pipeline/blob/227d66c763c3923e3b30c6c61152cab652685d14/project_overview.jpg))
+
+
+
 Fully local, private, auto-scaling RAG system – exactly the architecture used at Booking.com, ING, Philips, and other Dutch tech giants.
 
 ## Features
